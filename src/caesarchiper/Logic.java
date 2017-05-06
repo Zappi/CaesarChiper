@@ -1,18 +1,40 @@
 package caesarchiper;
 
 public class Logic {
-    
-    public String convert(String originalText) {
+
+    public String encrypt(String text, int key) {
+
+        String finalString = "";
+
+        for (int i = 0; i < text.length(); i++) {
+
+            int c1 = text.charAt(i);
+
+            if (Character.isUpperCase(c1)) {
+                c1 = c1 + (key % 26);
+
+                if (c1 > 'Z') {
+                    c1 = c1 - 26;
+                }
+
+            } else if(Character.isLowerCase(c1)) {
+                c1=c1+(key%26);
+                
+                if(c1>'z') {
+                    c1 = c1-26;
+                }
+            }
+            finalString=finalString+(char)+c1;
+
+        }
         
-        
-        return "afaslfkaöfkas";
+        return finalString;
     }
 
-    String decrypt(String text) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+
+    public String decrypt(String text) {
+
+        return "";
     }
-    
-    
-    
-    
 }

@@ -24,15 +24,23 @@ public class CaesarChiper extends Application  {
         Logic logic = new Logic();
         stage.setTitle("Caesar Chiper");
         stage.setMinHeight(200);
-        stage.setMinWidth(400);
+        stage.setMinWidth(700);
+        
+        Label text = new Label("Give a String: ");
+        Label keyValue = new Label("Give a key value(Between 1-25)");
+                
         
         TextField originalText = new TextField();
         TextField convertedText = new TextField();
+        TextField numberKey = new TextField();
+        numberKey.setPrefWidth(40);
+        
+        
         Button encryptButton = new Button("Encrypt");
         Button decryptButton = new Button("Decrypt");
 
         encryptButton.setOnAction((event) -> {
-            convertedText.setText(logic.convert(originalText.getText()));
+            convertedText.setText(logic.encrypt(originalText.getText(), Integer.parseInt(numberKey.getText())));
         });
         
         decryptButton.setOnAction((event) -> {
@@ -42,15 +50,19 @@ public class CaesarChiper extends Application  {
         
         BorderPane borderpane = new BorderPane();
         
-        HBox hbox = new HBox();
-        hbox.getChildren().addAll(encryptButton, decryptButton);
+        HBox buttonsHbox = new HBox();
+        buttonsHbox.getChildren().addAll(encryptButton, decryptButton);
         
-        borderpane.setTop(originalText);
+        HBox inputHbox = new HBox();
+        inputHbox.getChildren().addAll(text, originalText, keyValue, numberKey);
+        inputHbox.setSpacing(10);
+        
+        borderpane.setTop(inputHbox);
         borderpane.setBottom(convertedText);
-        borderpane.setCenter(hbox);
+        borderpane.setCenter(buttonsHbox);
        
-        hbox.setSpacing(40);
-        hbox.setPrefWidth(200);
+        buttonsHbox.setSpacing(40);
+        buttonsHbox.setPrefWidth(200);
         borderpane.setPrefSize(200,400);
 
         Scene scene = new Scene(borderpane);
