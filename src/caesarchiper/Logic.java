@@ -8,33 +8,53 @@ public class Logic {
 
         for (int i = 0; i < text.length(); i++) {
 
-            int c1 = text.charAt(i);
+            int asciiValue = text.charAt(i);
 
-            if (Character.isUpperCase(c1)) {
-                c1 = c1 + (key % 26);
+            if (Character.isUpperCase(asciiValue)) {
+                asciiValue = asciiValue + (key % 26);
 
-                if (c1 > 'Z') {
-                    c1 = c1 - 26;
+                if (asciiValue > 'Z') {
+                    asciiValue = asciiValue - 26;
                 }
 
-            } else if(Character.isLowerCase(c1)) {
-                c1=c1+(key%26);
-                
-                if(c1>'z') {
-                    c1 = c1-26;
+            } else if (Character.isLowerCase(asciiValue)) {
+                asciiValue = asciiValue + (key % 26);
+
+                if (asciiValue > 'z') {
+                    asciiValue = asciiValue - 26;
                 }
             }
-            finalString=finalString+(char)+c1;
+            finalString = finalString + (char) +asciiValue;
 
         }
-        
+
         return finalString;
     }
 
-    
+    public String decrypt(String text, int key) {
 
-    public String decrypt(String text) {
-
-        return "";
+        String decrypt="";
+        for (int i = 0; i < text.length(); i++) {
+            
+            int asciiValue = text.charAt(i);
+            
+            if(Character.isUpperCase(asciiValue)) {
+                asciiValue = asciiValue-(key%26);
+                
+                if(asciiValue < 'A') 
+                    asciiValue+=26;
+            } else if(Character.isLowerCase(asciiValue)) {
+                asciiValue=asciiValue-(key%26);
+                
+                if(asciiValue<'a') {
+                    asciiValue+=26;
+                }
+            }
+            
+            decrypt+=(char)asciiValue;
+            
+        }
+        
+        return decrypt;
     }
 }
